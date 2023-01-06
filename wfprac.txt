@@ -1,0 +1,244 @@
+Slip:-1
+<html>
+
+<head>
+    <title>Employee Registration Details</title>
+    <script type="text/javascript">
+        function valid() {
+            var date = document.getElementById("myDate").value;
+            var nm = document.getElementById("name").value;
+            var sl = document.getElementById("salary").value;
+            var join_date = document.getElementById("jd").value;
+            if (nm == "" || nm == null) {
+                alert("Enter the name")
+            }
+            if (sl == "" || sl == null) {
+                alert("Enter the salary");
+            } else if (isNaN(sl) || sl < 5000) {
+                alert("Salary must a number above 5000 ");
+            }else if (date == "" || date == null) {
+                alert("Enter the Date of Birth");
+            } 
+ else if (join_date == "" || join_date == null) {
+                alert("Enter the joining date")
+            } else
+                alert("The Employee Information is submitted successfully");
+        }
+    </script>
+</head>
+
+<body>
+    <centre><b>
+            <h3>Employee Registration Details</h3>
+            <form action=""onsubmit="return valid()"method="post">
+            Full Name:<input type="text"id="name"><br><br>
+            Salary:<input type="text"id="salary"><br><br>
+            Birthday: <input type="date" id="myDate"><br><br>
+            Joining Date: <input type="date" id="jd"><br><br>
+            <input type="submit" value="Submit"><br><br>
+        </form>
+        </b></centre>
+</body>
+
+</html>
+--------------------------------------------------------------------------------------------------------------
+Slip:-2
+
+<html>
+<head>
+<title>Employee Information Form</title>
+<script type="text/javascript">
+function valid()
+{
+var db=document.getElementById("db").value;
+var dj=document.getElementById("dj").value;
+var sl=document.getElementById("sl").value;
+
+if(db==""||db==null)
+{
+alert("Enter the Date of Birth");
+return false;
+}
+
+else if(dj==""||dj==null)
+{
+alert("Enter the Date of Joining");
+return false;
+}
+
+else if(sl==""||sl==null||sl<0)
+{
+alert("Enter the Salary");
+return false;
+}
+
+else
+alert("The Employee Information Submitted Successfully");
+}
+
+</script>
+</head>
+<body>
+<center><b>
+<h3>Employee Information Form</h3>
+<from action="" onsubmit="valid()" method="post">
+Date of Birth: <input type="date" id="db"><br><br>
+Date of Joining: <input type="date" id="dj"><br><br>
+Salary: <input type="number" id="sl"><br><br>
+
+<input type="submit" value="Submit">
+</form>
+</b></center>
+</body>
+</html>
+------------------------------------------------------------------------------------------------------------
+Slip:-3
+
+<html>
+<head>
+<title>Title of the Document</title>
+<script src="https://code.jquery.com/jquery-3.5.0.min.js">
+</script>
+</head>
+<body style="background-color:#f3bcb0;">
+<center>
+<form>
+<p><h1>Enter an email address:</h1></p>
+<input id='email'>
+<br><br>
+<button type='submit' id='validate'>Validate button</button>
+</form>
+<div id='result'></div>
+<script>
+function validateEmail(email) {
+let res = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+return res.test(email);
+}
+function validate() {
+let result = $("#result");
+let email = $("#email").val();
+result.text("");
+if(validateEmail(email)) {
+result.text(email + " is valid");
+result.css("color", "blue");
+} else {
+result.text(email + " is not valid");
+result.css("color", "red");
+}
+return false;
+}
+$("#validate").on("click", validate);
+</script>
+</center>
+</body>
+</html>
+---------------------------------------------------------------------------------------
+Slip:-4
+
+var http=require('http');
+var uc=require('uppercase');
+http.createServer(function(req,res)
+{
+res.writeHead(200,{'Content-Type':'text/html'});
+res.write(uc("hello world!"));
+res.end();
+}).listen(8080);
+---------------------------------------------------------------------------------------------------
+Slip:-5
+
+var fs=require("fs");
+function ReadAppend(file,appendFile)
+{
+fs.readFile('1.txt',function(err,data)
+{
+if(err)
+throw err;
+console.log('Files was read');
+
+fs.appendFile('2.txt',data,function(err)
+{
+if(err)
+throw err;
+console.log('The"data of append"was appended to file!');
+});
+});
+}
+file='1.txt';
+appendFile='2.txt';
+ReadAppend('file,appendFile');
+--------------------------------------------------------------------------------------------------------
+Slip:-6
+
+var http=require('http');
+var url=require('url');
+var fs=require('fs');
+
+http.createServer(function(req,res)
+{
+var q=url.parse(req.url,true);
+var filename="input.txt"+q.pathname;
+fs.readFile(filename,function(err,data)
+{
+if(err)
+{
+res.writeHead(404,{'Content-Type':'text/html'});
+return res.end("404 Not Found");
+}
+res.writeHead(200,{'Content-Type':'text/html'});
+res.write(data);
+return res.end();
+});
+}).listen(8080);
+---------------------------------------------------------------------------------------------
+Slip:-7
+
+var http=require('http');
+var formidable=require('formidable');
+var fs=require('fs');
+
+http.createServer(function(req,res)
+{
+if(req.url=='/fileupload')
+{
+var form=new formidable.IncomingForm();
+form.parse(req,function(err,fields,files){
+var oldpath=files.filetoupload.path;
+
+var newpath='C:/Users/Administrator/Desktop/wf notes/Your file'+files.filetoupload.name;
+fs.rename(oldpath,newpath,function(err)
+{
+if(err) throw err;
+res.write('File uploaded and moved!');
+res.end();
+});
+});
+}
+else{
+res.writeHead(200,{'Content-Type':'text/html'});
+res.write('<form action="fileupload" method="post" enctype="multipart/form-data">');
+res.write('<input type="file" name="filetoupload"><br>');
+res.write('<input type="submit">');
+return res.end();
+}
+}).listen(8080);
+-----------------------------------------------------------------------------------------
+Slip:-8
+
+var MongoClient=require('mongodb').MongoClient;
+var url="mongodb://localhost:27017/MyMongoDB";
+MongoClient.connect(url,function(err,db)
+{
+if(err) throw err;
+console.log("Database created!");
+db.close();
+});
+---------------------------------------------------------------------------------
+Slip:-12,25
+
+var http=require('http');
+http.createServer(function(req,res)
+{
+res.writeHead(200,{'Content-Type':'text/plain'});
+res.end('Hello World!');
+}).listen(8080);
+-----------------------------------------------------------------------------
